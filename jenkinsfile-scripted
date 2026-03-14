@@ -10,5 +10,13 @@ node {
     stage('Deploy') {
         sh 'echo "Deploying application..."'
     }
-    
+    post {
+    always {
+        emailext (
+            to: 'ravichinta1997@gmail.com',
+            subject: "Failed: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
+            body: "Check build: ${env.BUILD_URL}"
+        )
+    }
+    }
 }
