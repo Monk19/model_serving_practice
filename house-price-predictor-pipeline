@@ -6,18 +6,14 @@ pipeline{
         stage('Check environment'){
             steps{
 
-                echo "House price predictor ml modal"
-                echo java --version
-                echo python --version
-                echo docker --version
-                echo pwd
+                sh 'echo "House price predictor ml modal"'
+                
             }
         }
         stage('Test WorkSpace'){
             steps{
-                echo "Creating a text file in /home/reactserve/jenkins/agent"
-                touch connection_test.py
-                ls -l  
+                sh 'echo "Creating a text file in /home/reactserve/jenkins/agent"'
+                
              }
         }
     }
