@@ -3,22 +3,31 @@ pipeline{
     agent {label  'mlops-worker'}
 
     stages{
-        stage('Check environment'){
+        stage('Cleanup'){
             steps{
-
-                sh 'echo "House price predictor ml modal" '
-                sh 'python --version'
-                sh 'docker --version'
-                sh 'pwd' 
-                
+                echo 'Cleaning up old containers ....'
+                // Removes old version if it exists so we don't have name conflicts
+                sh 'docker rm -f house-predictor-container || true'
             }
         }
-        stage('Test WorkSpace'){
+        stage('Checkout Code'){
             steps{
-                sh 'echo "Creating a text file in /home/reactserve/jenkins/agent"'
-                sh 'touch test_connection.txt'
-                
+
+                checkout scm
              }
+        }
+
+        stage('Build Image'){
+            steps{
+                echo 'Building ML Model into a Docker Image...'
+                sh 'docker build -t house-price-predictor:latest .'
+            }
+        }
+        stage('Deploy Locally') {
+            steps {
+                echo 'Starting the Model Server on Port 8080...'
+                sh 'docker run -d -p 8080:8000 --name house-predictor-container house-price-predictor:latest'
+            }
         }
     }
 
