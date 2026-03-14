@@ -5,9 +5,18 @@ pipeline{
     stages{
         stage('Cleanup'){
             steps{
+<<<<<<< HEAD
                 echo 'Cleaning up old containers ....'
                 // Removes old version if it exists so we don't have name conflicts
                 sh 'docker rm -f house-predictor-container || true'
+=======
+
+                sh 'echo "House price predictor ml modal" '
+                sh 'python3 --version'
+                sh 'docker --version'
+                sh 'pwd' 
+                
+>>>>>>> 7bcd7978d14051b0abcdf4be2cc9042a31d0a535
             }
         }
         stage('Checkout Code'){
