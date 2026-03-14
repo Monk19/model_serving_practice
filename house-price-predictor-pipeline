@@ -2,25 +2,19 @@ pipeline{
 
     agent {
 
-        label: mlops-worker
+        label mlops-worker
     }
 
     stages{
         stage('Check environment'){
             steps{
-
                 echo "House price predictor ml modal"
-                sh java --version
-                sh python --version
-                sh docker --version
-                sh pwd
+                
             }
         }
         stage('Test WorkSpace'){
             steps{
             echo "Creating a text file in /home/reactserve/jenkins/agent"
-            sh 'touch connection_test.py'
-            sh 'ls -l'  
              }
         }
     }
