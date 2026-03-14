@@ -11,7 +11,7 @@ node {
         sh 'echo "Deploying application..."'
     }
     post {
-    always {
+    failure {
         emailext (
             to: 'ravichinta1997@gmail.com',
             subject: "Failed: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
