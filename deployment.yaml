@@ -13,10 +13,11 @@ spec:
     metadata:
       labels:
         app: predictor
-  spec:
-    containers:
-    - name: predictor-api
-      image:
-      ports:
-      - containerPort:8000
-      
+    spec:
+      containers:
+      - name: predictor-api
+        image:
+        ports:
+        - containerPort:8000
+# we can use kubectl set image to change name of image so that newly built images can be feed to deployment file
+# kubectl set image deployment/deployment-name container-name=new-container-image:latest
