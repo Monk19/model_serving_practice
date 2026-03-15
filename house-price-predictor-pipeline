@@ -20,12 +20,14 @@ pipeline{
         stage('Build Image'){
             steps{
                 echo 'Building ML Model into a Docker Image...'
+                sh 'docker build -t house-price-predictor:${BUILD_NUMBER} .'
                 sh 'docker build -t house-price-predictor:latest .'
             }
         }
         stage('Deploy Locally') {
             steps {
                 echo 'Starting the Model Server on Port 8080...'
+                sh 'docker rm -f house-predictor-containe || true'
                 sh 'docker run -d -p 8080:8000 --name house-predictor-container house-price-predictor:latest'
             }
         }
