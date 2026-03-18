@@ -29,10 +29,8 @@ pipeline{
             steps {
                 echo 'Starting the Model Server on Port 8080...'
                 sh 'docker rm -f house-predictor-containe || true'
-                sh 'kubectl apply -f deployment.yaml'
-                sh 'kubectl apply -f ml-service.yaml'
-                sh 'kubectl get pods'
-                // sh 'docker run -d -p 8080:8000 --name house-predictor-container house-price-predictor:${BUILD_NUMBER}'
+              
+                sh 'docker run -d -p 8080:8000 --name house-predictor-container house-price-predictor:${BUILD_NUMBER}'
             }
         }
     }
