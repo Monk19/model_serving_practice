@@ -6,7 +6,6 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      labels:
         app: predictor
   template:
     metadata:
