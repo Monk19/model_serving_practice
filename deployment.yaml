@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: Housing-price-predictor
+    name: housing-price-predictor
 spec:
   replicas: 2
   selector:
