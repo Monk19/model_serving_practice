@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: predictor-api
-        image:
+        image:house-price-predictor:latest
         ports:
         - containerPort:8000
 # we can use kubectl set image to change name of image so that newly built images can be feed to deployment file
