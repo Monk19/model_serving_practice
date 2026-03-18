@@ -22,6 +22,7 @@ pipeline{
                 echo 'Building ML Model into a Docker Image...'
                 sh 'docker build -t house-price-predictor:${BUILD_NUMBER} .'
                 sh 'docker build -t house-price-predictor:latest .'
+                sh 'kubectl apply -f deployment.yaml'
             }
         }
         stage('Deploy Locally') {
