@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: service
+metadata:
+  name: predictor-service
+spec:
+  selector:
+    app: predictor
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8000
+  type: LoadBalancer
