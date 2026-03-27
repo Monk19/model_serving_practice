@@ -22,7 +22,7 @@ pipeline{
             steps{
                 echo 'Building ML Model into a Docker Image...'
                 sh 'docker build -t my-fastapi-app:${BUILD_NUMBER} .'
-                sh'docker push mdock1997/houseprice-predictor:${BUILD_NUMBER}'
+                sh 'docker push mdock1997/houseprice-predictor:${BUILD_NUMBER}'
             }
         }
         stage('Deploy Locally') {
