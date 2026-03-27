@@ -29,7 +29,7 @@ pipeline{
         }
         stage('Deploy Locally') {
             steps{
-
+                
                 echo 'Starting the Model Server on Port 8080...'
                 sh """
                     sed -i 's|house-price-predictor:latest|mdock1997/houseprice-predictor:74|g' deployment.yaml
