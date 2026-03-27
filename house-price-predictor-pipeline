@@ -25,7 +25,7 @@ pipeline{
             }
         }
         stage('Deploy Locally') {
-           
+            steps{
                 echo 'Starting the Model Server on Port 8080...'
                 sh 'docker rm -f house-predictor-containe || true'
                 sh "sed -i 's/house-price-predictor:latest/my-fastapi-app:${env.BUILD_NUMBER}/g' deployment.yaml"
@@ -34,7 +34,7 @@ pipeline{
                 sh 'kubectl get pods'
                 sh 'env'
                 // sh 'docker run -d -p 8080:8000 --name house-predictor-container my-fastapi-app:${BUILD_NUMBER}'
-            
+            }
         }
         post {
         always {
