@@ -7,7 +7,8 @@ pipeline{
             steps{
                 echo 'Cleaning up old containers ....'
                 // Removes old version if it exists so we don't have name conflicts
-                sh 'docker rm -f house-predictor-container || true'
+                sh "docker rmi my-fastapi-app:latest || true"
+                sh "docker image prune -f"
             }
         }
         stage('Checkout Code'){
@@ -20,21 +21,29 @@ pipeline{
         stage('Build Image'){
             steps{
                 echo 'Building ML Model into a Docker Image...'
-                sh 'docker build -t house-price-predictor:${BUILD_NUMBER} .'
-                sh 'docker build -t house-price-predictor:latest .'
-                
+                sh 'docker build -t my-fastapi-app:${BUILD_NUMBER} .'
             }
         }
         stage('Deploy Locally') {
-            steps {
+           
                 echo 'Starting the Model Server on Port 8080...'
                 sh 'docker rm -f house-predictor-containe || true'
+                sh "sed -i 's/house-price-predictor:latest/my-fastapi-app:${env.BUILD_NUMBER}/g' deployment.yaml"
                 sh 'kubectl apply -f deployment.yaml'
                 sh 'kubectl apply -f ml-service.yaml'
                 sh 'kubectl get pods'
-                // sh 'docker run -d -p 8080:8000 --name house-predictor-container house-price-predictor:${BUILD_NUMBER}'
+                sh 'env'
+                // sh 'docker run -d -p 8080:8000 --name house-predictor-container my-fastapi-app:${BUILD_NUMBER}'
             }
         }
+        post {
+        always {
+            // Cleans up unused containers and dangling images
+            sh 'docker system prune -f'
+            echo 'Cleaning up the workspace...'
+            cleanWs()
+        }
+    }
     }
 
 }
