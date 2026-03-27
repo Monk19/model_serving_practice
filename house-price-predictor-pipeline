@@ -36,14 +36,16 @@ pipeline{
                 // sh 'docker run -d -p 8080:8000 --name house-predictor-container my-fastapi-app:${BUILD_NUMBER}'
             }
         }
-        post {
+        
+    }
+
+    post {
         always {
             // Cleans up unused containers and dangling images
             sh 'docker system prune -f'
             echo 'Cleaning up the workspace...'
             cleanWs()
         }
-    }
-    }
+        }
 
 }
