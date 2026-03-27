@@ -34,7 +34,7 @@ pipeline{
                 sh 'kubectl get pods'
                 sh 'env'
                 // sh 'docker run -d -p 8080:8000 --name house-predictor-container my-fastapi-app:${BUILD_NUMBER}'
-            }
+            
         }
         post {
         always {
