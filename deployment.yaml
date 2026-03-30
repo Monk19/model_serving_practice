@@ -17,5 +17,7 @@ spec:
         image: 731880212849.dkr.ecr.eu-north-1.amazonaws.com/houseprice-predictor:latest
         ports:
         - containerPort: 8000
+      imagePullSecrets:
+      - name: ecr-registry-key
 # we can use kubectl set image to change name of image so that newly built images can be feed to deployment file
 # kubectl set image deployment/deployment-name container-name=new-container-image:latest
