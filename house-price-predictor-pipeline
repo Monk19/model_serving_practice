@@ -48,7 +48,7 @@ pipeline{
                 def ecrUrl = "731880212849.dkr.ecr.eu-north-1.amazonaws.com"
                 def repositoryName = "houseprice-predictor"
                 def imageTag = "${ecrUrl}/${repositoryName}:${env.BUILD_NUMBER}"
-                sh "aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin ${ecrUrl}
+                sh "aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin ${ecrUrl}"
                 sh 'docker build -t ${imageTag} .'
                 sh 'docker tag ${imageTag} ${ecrUrl}/${repositoryName}:latest"
                 sh 'docker push ${ecrUrl}/${repositoryName}:latest"
