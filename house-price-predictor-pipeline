@@ -56,6 +56,8 @@ pipeline{
                 sh "docker build -t ${imageTag} ."
                 sh "docker tag ${imageTag} ${ecrUrl}/${repositoryName}:latest"
                 sh "docker push ${ecrUrl}/${repositoryName}:latest"
+                sh 'kubectl apply -f deployment.yaml'
+                sh 'kubectl apply -f ml-service.yaml'
 
                 }
             }
