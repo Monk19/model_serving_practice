@@ -54,7 +54,6 @@ pipeline{
 
                 sh "aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin ${ecrUrl}"
                 sh "docker build -t ${imageTag} ."
-                sh "docker push ${imageTag}"
                 sh "docker tag ${imageTag} ${ecrUrl}/${repositoryName}:latest"
                 sh "docker push ${ecrUrl}/${repositoryName}:latest"
 
